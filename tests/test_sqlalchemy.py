@@ -4,7 +4,7 @@ from src.config import Database, SQLAlchemyConfig
 from src.setup import app, db
 
 
-class SQLAlchemyTest(unittest.TestCase):
+class TestSQLAlchemy(unittest.TestCase):
     def setUp(self):
         self.app = app
         self.db = db
