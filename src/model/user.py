@@ -24,19 +24,32 @@ class User(BaseModel, db.Model):
     username = db.Column(db.String(50), unique=True, index=True, nullable=False)
     email = db.Column(db.String(100), unique=True, index=True, nullable=False)
     _password = db.Column(db.String(128), nullable=False)
-    _phones = db.Column(JSON, default=[])
-    _address = db.Column(JSON, default={})
-    _user_level = db.Column(Enum(UserLevelEnum), default=UserLevelEnum.USER)
-    joined_at = db.Column(db.DateTime, default=datetime.now)
+    _phones = db.Column(JSON, default=[], nullable=True)
+    _address = db.Column(JSON, default={}, nullable=True)
+    _user_level = db.Column(Enum(UserLevelEnum), default=UserLevelEnum.USER, nullable=False)
+    joined_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+
+    # relationships
+    laptops = db.relationship("Laptop", back_populates="owner", lazy="joined")
+    cell_phones = db.relationship("CellPhone", back_populates="owner", lazy="joined")
+    vehicles = db.relationship("Vehicle", back_populates="owner", lazy="joined")
 
     def __init__(self, username: str, email: str, password: str, **kwargs):
         super(User, self).__init__(**kwargs)
         self.username = username
         self.email = email
-        self._password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+        self._password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+    def __eq__(self, other):
+        return self.uid == other.uid
 
     def __str__(self):
         return self.__repr__()
+
+    def check_password(self, password: str) -> bool:
+        return password is not None \
+               and password != "" \
+               and bcrypt.checkpw(password.encode(), self._password.encode())
 
     def update(self, **kwargs):
         self._phones = kwargs.get("phones")
