@@ -7,7 +7,7 @@ from sqlalchemy import Enum
 from sqlalchemy.dialects.postgresql import UUID, JSON
 
 from src.utilities import Generator
-from .base import db, BaseModel, MetaBaseModel
+from .base import db, BaseModel
 
 
 class UserLevelEnum(enum.Enum):
@@ -17,7 +17,7 @@ class UserLevelEnum(enum.Enum):
     SUPER_ADMIN = "super-admin"
 
 
-class User(db.Model, BaseModel, metaclass=MetaBaseModel):
+class User(BaseModel, db.Model):
     __tablename__ = "user"
 
     uid = db.Column(UUID, primary_key=True, default=Generator.uuid)
@@ -34,6 +34,9 @@ class User(db.Model, BaseModel, metaclass=MetaBaseModel):
         self.username = username
         self.email = email
         self._password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+
+    def __str__(self):
+        return self.__repr__()
 
     def update(self, **kwargs):
         self._phones = kwargs.get("phones")
