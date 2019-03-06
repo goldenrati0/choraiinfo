@@ -3,7 +3,7 @@ from unittest import TestCase
 from src.utilities import Generator
 
 
-class UtilityTest(TestCase):
+class TestUtility(TestCase):
     def test_uuid_generator(self):
         self.assertIsNotNone(Generator.uuid())
 
