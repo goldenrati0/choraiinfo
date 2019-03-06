@@ -2,13 +2,14 @@ import datetime
 from typing import Dict, Any
 from unittest import TestCase
 
-from mimesis import Person
+from mimesis import Person, Generic
 
-from src.model import User, UserLevelEnum
+from src.model import User, UserLevelEnum, Laptop, ItemTypeEnum, CellPhone, Vehicle
 from src.setup import db
+from src.utilities import Generator
 
 
-class UserModelTest(TestCase):
+class TestUserModel(TestCase):
     def setUp(self):
         self.db = db
         self.db.create_all()
@@ -56,6 +57,16 @@ class UserModelTest(TestCase):
         user_string = str(user)
         self.assertIsNotNone(user_string)
 
+    def test_user_check_password(self):
+        username = self.person.username()
+        email = self.person.email(domains=["gmail.com"])
+        password = self.person.password(length=25)
+        user = User(username=username, email=email, password=password)
+        user.save()
+
+        self.assertTrue(user.check_password(password))
+        self.assertFalse(user.check_password("wrong password"))
+
     def test_user_json_property(self):
         username = self.person.username()
         email = self.person.email(domains=["gmail.com"])
@@ -97,7 +108,7 @@ class UserModelTest(TestCase):
         username = self.person.username()
         email = self.person.email(domains=["gmail.com"])
         password = self.person.password(length=25)
-        user_level = UserLevelEnum.MODERATOR
+        user_level = UserLevelEnum.ADMIN
         user = User(username=username, email=email, password=password, _user_level=user_level)
         user.save()
 
@@ -107,7 +118,7 @@ class UserModelTest(TestCase):
         username = self.person.username()
         email = self.person.email(domains=["gmail.com"])
         password = self.person.password(length=25)
-        user_level = UserLevelEnum.MODERATOR
+        user_level = UserLevelEnum.USER
         user = User(username=username, email=email, password=password, _user_level=user_level)
         user.save()
 
@@ -132,7 +143,7 @@ class UserModelTest(TestCase):
         username = self.person.username()
         email = self.person.email(domains=["gmail.com"])
         password = self.person.password(length=25)
-        user_level = UserLevelEnum.MODERATOR
+        user_level = UserLevelEnum.SUPER_ADMIN
         user = User(username=username, email=email, password=password, _user_level=user_level)
         user.save()
 
@@ -165,7 +176,7 @@ class UserModelTest(TestCase):
         username = self.person.username()
         email = self.person.email(domains=["gmail.com"])
         password = self.person.password(length=25)
-        user_level = UserLevelEnum.MODERATOR
+        user_level = UserLevelEnum.SUPER_ADMIN
         user = User(username=username, email=email, password=password, _user_level=user_level)
         user.save()
 
@@ -180,3 +191,131 @@ class UserModelTest(TestCase):
             User.username == username
         ).first()
         self.assertIsNone(find_user)
+
+    def test_user_relationship_laptops(self):
+        username = self.person.username()
+        email = self.person.email(domains=["gmail.com"])
+        password = self.person.password(length=25)
+        user_level = UserLevelEnum.MODERATOR
+        user = User(username=username, email=email, password=password, _user_level=user_level)
+        user.save()
+
+        laptop1 = Laptop(user.uid, serial_number="unique_serial_" + Generator.uuid(),
+                         mac_address="unique_mac_" + Generator.uuid(), is_stolen=True)
+        laptop2 = Laptop(user.uid, serial_number="unique_serial_" + Generator.uuid(),
+                         mac_address="unique_mac_" + Generator.uuid(),
+                         remarks="This laptop is imported and genuine operating system installed.")
+
+        user.laptops.append(laptop1)
+        user.laptops.append(laptop2)
+        db.session.commit()
+
+        find_user = User.query.get(user.uid)
+        self.assertIsNotNone(find_user)
+
+        self.assertTrue(find_user.laptops != [])
+        self.assertEqual(len(find_user.laptops), 2)
+
+        self.assertTrue(laptop1.owner == laptop2.owner)
+
+        laptops = [laptop1, laptop2]
+        for index, laptop in enumerate(laptops):
+            self.assertEqual(find_user.laptops[index].uid, laptops[index].uid)
+            self.assertEqual(find_user.laptops[index].item_type, ItemTypeEnum.LAPTOP)
+            self.assertEqual(find_user.laptops[index].is_stolen, laptops[index].is_stolen)
+            self.assertEqual(find_user.laptops[index].gd_copy_number, laptops[index].gd_copy_number)
+            self.assertEqual(find_user.laptops[index].remarks, laptops[index].remarks)
+            self.assertEqual(find_user.laptops[index].remarks, laptops[index].remarks)
+            self.assertEqual(find_user.laptops[index].record_time, laptops[index].record_time)
+            self.assertEqual(find_user.laptops[index].last_update, laptops[index].last_update)
+
+            self.assertEqual(find_user.laptops[index].serial_number, laptops[index].serial_number)
+            self.assertEqual(find_user.laptops[index].mac_address, laptops[index].mac_address)
+
+    def test_user_relationship_cellphones(self):
+        username = self.person.username()
+        email = self.person.email(domains=["gmail.com"])
+        password = self.person.password(length=25)
+        user_level = UserLevelEnum.USER
+        user = User(username=username, email=email, password=password, _user_level=user_level)
+        user.save()
+
+        generic = Generic("en")
+
+        phone1 = CellPhone(user.uid, imei_1=generic.code.imei())
+        phone2 = CellPhone(user.uid, imei_1=generic.code.imei(), imei_2=generic.code.imei(),
+                           remarks="Dual sim phone.", is_stolen=True, gd_copy_number=f"GD-{Generator.uuid()}")
+        phone3 = CellPhone(user.uid, imei_2=generic.code.imei(), is_stolen=False,
+                           remarks="Oneek bhaalo phone!")
+
+        user.cell_phones.append(phone1)
+        user.cell_phones.append(phone2)
+        user.cell_phones.append(phone3)
+        db.session.commit()
+
+        find_user = User.query.get(user.uid)
+        self.assertIsNotNone(find_user)
+
+        self.assertTrue(find_user.cell_phones != [])
+        self.assertEqual(len(find_user.cell_phones), 3)
+
+        self.assertTrue(phone1.owner == phone2.owner == phone3.owner)
+
+        phones = [phone1, phone2, phone3]
+        for index, _ in enumerate(phones):
+            self.assertEqual(find_user.cell_phones[index].uid, phones[index].uid)
+            self.assertEqual(find_user.cell_phones[index].item_type, ItemTypeEnum.CELL_PHONE)
+            self.assertEqual(find_user.cell_phones[index].is_stolen, phones[index].is_stolen)
+            self.assertEqual(find_user.cell_phones[index].gd_copy_number, phones[index].gd_copy_number)
+            self.assertEqual(find_user.cell_phones[index].remarks, phones[index].remarks)
+            self.assertEqual(find_user.cell_phones[index].remarks, phones[index].remarks)
+            self.assertEqual(find_user.cell_phones[index].record_time, phones[index].record_time)
+            self.assertEqual(find_user.cell_phones[index].last_update, phones[index].last_update)
+
+            self.assertEqual(find_user.cell_phones[index].imei_1, phones[index].imei_1)
+            self.assertEqual(find_user.cell_phones[index].imei_2, phones[index].imei_2)
+
+    def test_user_relationship_vehicles(self):
+        username = self.person.username()
+        email = self.person.email(domains=["gmail.com"])
+        password = self.person.password(length=25)
+        user_level = UserLevelEnum.ADMIN
+        user = User(username=username, email=email, password=password, _user_level=user_level)
+        user.save()
+
+        vehicle1 = Vehicle(user.uid, serial_number=f"serial-{Generator.uuid()}")
+        vehicle2 = Vehicle(user.uid,
+                           serial_number=f"serial-{Generator.uuid()}",
+                           engine_number=f"engine_{Generator.uuid()}")
+        vehicle3 = Vehicle(user.uid,
+                           serial_number=f"serial-{Generator.uuid()}",
+                           engine_number=f"engine_{Generator.uuid()}",
+                           license_number=f"license-{Generator.uuid()}")
+
+        user.vehicles.append(vehicle1)
+        user.vehicles.append(vehicle2)
+        user.vehicles.append(vehicle3)
+        db.session.commit()
+
+        find_user = User.query.get(user.uid)
+        self.assertIsNotNone(find_user)
+
+        self.assertTrue(find_user.vehicles != [])
+        self.assertEqual(len(find_user.vehicles), 3)
+
+        self.assertTrue(vehicle1.owner == vehicle2.owner == vehicle3.owner)
+
+        vehicles = [vehicle1, vehicle2, vehicle3]
+        for index, _ in enumerate(vehicles):
+            self.assertEqual(find_user.vehicles[index].uid, vehicles[index].uid)
+            self.assertEqual(find_user.vehicles[index].item_type, ItemTypeEnum.VEHICLE)
+            self.assertEqual(find_user.vehicles[index].is_stolen, vehicles[index].is_stolen)
+            self.assertEqual(find_user.vehicles[index].gd_copy_number, vehicles[index].gd_copy_number)
+            self.assertEqual(find_user.vehicles[index].remarks, vehicles[index].remarks)
+            self.assertEqual(find_user.vehicles[index].remarks, vehicles[index].remarks)
+            self.assertEqual(find_user.vehicles[index].record_time, vehicles[index].record_time)
+            self.assertEqual(find_user.vehicles[index].last_update, vehicles[index].last_update)
+
+            self.assertEqual(find_user.vehicles[index].serial_number, vehicles[index].serial_number)
+            self.assertEqual(find_user.vehicles[index].engine_number, vehicles[index].engine_number)
+            self.assertEqual(find_user.vehicles[index].license_number, vehicles[index].license_number)
