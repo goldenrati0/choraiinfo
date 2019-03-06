@@ -1,4 +1,5 @@
 import datetime
+from typing import Dict, Any
 from unittest import TestCase
 
 from mimesis import Person
@@ -40,8 +41,33 @@ class UserModelTest(TestCase):
         self.assertIsInstance(user, User)
         self.assertNotIsInstance(user, str)
         self.assertEqual(user.email, email)
+        self.assertEqual(user.email, email)
         self.assertEqual(user.username, username)
         self.assertIsInstance(user.joined_at, datetime.datetime)
+
+    def test_user_repr(self):
+        username = self.person.username()
+        email = self.person.email(domains=["gmail.com"])
+        password = self.person.password(length=25)
+        user = User(username=username, email=email, password=password)
+        user, error = user.save()
+        self.assertFalse(error)
+
+        user_string = str(user)
+        self.assertIsNotNone(user_string)
+
+    def test_user_json_property(self):
+        username = self.person.username()
+        email = self.person.email(domains=["gmail.com"])
+        password = self.person.password(length=25)
+        user = User(username=username, email=email, password=password)
+        user.save()
+
+        user_json: Dict[str, Any] = user.json
+
+        self.assertEqual(user_json.get("uid"), user.uid)
+        self.assertEqual(user_json.get("username"), user.username)
+        self.assertEqual(user_json.get("email"), user.email)
 
     def test_user_duplicate_error(self):
         username = self.person.username()
@@ -134,3 +160,23 @@ class UserModelTest(TestCase):
 
         for user in users:
             self.assertEqual(user.address.get("city"), "Dhaka")
+
+    def test_user_delete(self):
+        username = self.person.username()
+        email = self.person.email(domains=["gmail.com"])
+        password = self.person.password(length=25)
+        user_level = UserLevelEnum.MODERATOR
+        user = User(username=username, email=email, password=password, _user_level=user_level)
+        user.save()
+
+        find_user: User = User.query.filter(
+            User.username == username
+        ).first()
+        self.assertIsNotNone(find_user)
+
+        find_user.delete()
+
+        find_user: User = User.query.filter(
+            User.username == username
+        ).first()
+        self.assertIsNone(find_user)
