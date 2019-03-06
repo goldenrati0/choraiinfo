@@ -3,7 +3,7 @@ from unittest import TestCase
 from src.setup import app
 
 
-class FlaskAppTest(TestCase):
+class TestFlaskApp(TestCase):
     def setUp(self):
         self.app = app
 
