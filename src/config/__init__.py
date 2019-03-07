@@ -19,6 +19,9 @@ class Database:
 class SQLAlchemyConfig:
     track_modifications: bool = False
     database_uri: str = f"{Database._database}+{Database._db_driver}://{Database._db_username}:{Database._db_password}@{Database._db_host}:{Database._db_port}/{Database._db_name}"
+    echo: bool = False
+    native_unicode: str = "utf-8"
+    commit_on_teardown: bool = False
 
 
 class Configuration:
@@ -27,3 +30,6 @@ class Configuration:
     SECRET_KEY: str = FlaskConfig.SECRET_KEY
     SQLALCHEMY_DATABASE_URI: str = SQLAlchemyConfig.database_uri
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = SQLAlchemyConfig.track_modifications
+    SQLALCHEMY_ECHO: bool = SQLAlchemyConfig.echo
+    SQLALCHEMY_COMMIT_ON_TEARDOWN: bool = SQLAlchemyConfig.commit_on_teardown
+    SQLALCHEMY_NATIVE_UNICODE: str = SQLAlchemyConfig.native_unicode
