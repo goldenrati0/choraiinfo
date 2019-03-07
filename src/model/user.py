@@ -18,6 +18,19 @@ class UserLevelEnum(enum.Enum):
 
 
 class User(BaseModel, db.Model):
+    """
+        CREATE TABLE "user" (
+            uid UUID NOT NULL,
+            username VARCHAR(50) NOT NULL,
+            email VARCHAR(100) NOT NULL,
+            _password VARCHAR(128) NOT NULL,
+            _phones JSON,
+            _address JSON,
+            _user_level userlevelenum NOT NULL,
+            joined_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+            PRIMARY KEY (uid)
+        )
+    """
     __tablename__ = "user"
 
     uid = db.Column(UUID, primary_key=True, default=Generator.uuid)

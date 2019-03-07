@@ -36,6 +36,22 @@ class LostItem(BaseModel):
 
 
 class Laptop(LostItem, db.Model):
+    """
+        CREATE TABLE laptop (
+            uid UUID NOT NULL,
+            item_type itemtypeenum NOT NULL,
+            is_stolen BOOLEAN NOT NULL,
+            gd_copy_number VARCHAR(255),
+            remarks TEXT,
+            record_time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+            last_update TIMESTAMP WITHOUT TIME ZONE,
+            user_uid UUID,
+            serial_number VARCHAR(255),
+            mac_address VARCHAR(255),
+            PRIMARY KEY (uid),
+            FOREIGN KEY(user_uid) REFERENCES "user" (uid)
+        )
+    """
     __tablename__ = "laptop"
 
     user_uid = db.Column(UUID, db.ForeignKey("user.uid"))
@@ -58,6 +74,22 @@ class Laptop(LostItem, db.Model):
 
 
 class CellPhone(LostItem, db.Model):
+    """
+        CREATE TABLE cellphone (
+            uid UUID NOT NULL,
+            item_type itemtypeenum NOT NULL,
+            is_stolen BOOLEAN NOT NULL,
+            gd_copy_number VARCHAR(255),
+            remarks TEXT,
+            record_time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+            last_update TIMESTAMP WITHOUT TIME ZONE,
+            user_uid UUID,
+            imei_1 VARCHAR(100),
+            imei_2 VARCHAR(100),
+            PRIMARY KEY (uid),
+            FOREIGN KEY(user_uid) REFERENCES "user" (uid)
+        )
+    """
     __tablename__ = "cellphone"
 
     user_uid = db.Column(UUID, db.ForeignKey("user.uid"))
@@ -80,6 +112,23 @@ class CellPhone(LostItem, db.Model):
 
 
 class Vehicle(LostItem, db.Model):
+    """
+        CREATE TABLE vehicle (
+            uid UUID NOT NULL,
+            item_type itemtypeenum NOT NULL,
+            is_stolen BOOLEAN NOT NULL,
+            gd_copy_number VARCHAR(255),
+            remarks TEXT,
+            record_time TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+            last_update TIMESTAMP WITHOUT TIME ZONE,
+            user_uid UUID,
+            serial_number VARCHAR(255),
+            engine_number VARCHAR(255),
+            license_number VARCHAR(255),
+            PRIMARY KEY (uid),
+            FOREIGN KEY(user_uid) REFERENCES "user" (uid)
+        )
+    """
     __tablename__ = "vehicle"
 
     user_uid = db.Column(UUID, db.ForeignKey("user.uid"))
