@@ -106,8 +106,8 @@ class TestLostItem(TestCase):
                        serial_number=self.generic.hardware.cpu_model_code() + Generator.uuid(),
                        mac_address=self.generic.hardware.cpu_codename() + Generator.uuid())
             )
-        db.session.add_all(laptops)
-        db.session.commit()
+        self.db.session.add_all(laptops)
+        self.db.session.commit()
 
         query_laptops = Laptop.query.all()
         self.assertTrue(len(query_laptops) == length)
