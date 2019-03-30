@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from .test_lost_item_model import get_new_user
 from src.setup import db
+from .test_lost_item_model import get_new_user
 
 
 class TestHistory(TestCase):

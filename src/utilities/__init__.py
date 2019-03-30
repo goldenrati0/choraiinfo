@@ -1,1 +1,1 @@
-from .uid_generator import Generator
+from .generator import Generator
