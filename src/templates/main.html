@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> চুরি যাওয়া সকল জিনিষের সন্ধানে </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS and FONT script -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+
+</head>
+
+<body>
+
+<nav class="navbar sticky-top navbar-toggleable-md navbar-dark bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="{{ url_for('home') }}">Chorai Info</a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Made By:
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="https://github.com/tahmid-choyon">Md. Tahmid Hossain (14101148)</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Proudly Bangladeshi ♥
+                    <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item nav-right navbar-right">
+                <a class="nav-link" href="{{ url_for("userbp.user_login") }}">Login</a>
+            </li>
+            <li class="nav-item nav-right navbar-right">
+                <a class="nav-link" href="{{ url_for("userbp.user_register") }}">Register</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid ">
+    <div class="content">
+        <div class="row">
+
+            <div class="col-sm-6 col-md-4 col-lg-6 verticalLine">
+                <div class="left text-center churiHoiseButton">
+                    <a href="#">I have lost something</a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-8 col-lg-6">
+                <div class="right text-center checkChoraiTextButton">
+                    <a href="#">I want to check if something is "CHORAI"!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="writing text-center bottom-text-1">
+        <p>At CI, we use our small in-house matching technology to keep storage of all things lost in Bangladesh - from
+            phones to hearts. So that when buying a new device or getting a 2nd hand product, you can check if it is
+            stolen or not. Every time a stolen product is located, we inform the original owner about its position and
+            warn the buyer to report it to the police.
+        </p>
+
+        <p class="pad">And of course, we work with the CIA and Interpol to share every detail about your life and the
+            lives of people who stole your stuff. Not kidding.</p>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<script>
+    window.jQuery || document.write('<script src="js/vendor/jquery-1.12.4.min.js"><\/script>')
+
+</script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga = function () {
+        ga.q.push(arguments)
+    };
+    ga.q = [];
+    ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto');
+    ga('send', 'pageview')
+
+</script>
+
+<script>
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+</body>
+
+</html>

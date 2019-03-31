@@ -1,0 +1,70 @@
+.left {
+    margin-top: 225px;
+}
+
+.verticalLine {
+    border-right: 0.8px solid #d6d9da;
+    height: 500px;
+}
+
+.right {
+    margin-top: 225px;
+}
+
+.content {
+    margin-top: 100px;
+    align-content: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.content a {
+    border: 0.5px solid lightskyblue;
+    border-radius: 35px;
+    background: lightskyblue;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    line-height: 35px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    padding: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.writing p {
+    display: inline-block;
+    font-size: 13px;
+    color: #838383;
+    line-height: 22px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    padding: 20px;
+    margin-bottom: 20px;
+    font-family: 'Lato', sans-serif;
+}
+
+.pad {
+    padding-top: 0px;
+}
+
+a:hover {
+    background-color: dodgerblue;
+}
+
+a:active {
+    background-color: azure;
+}
+
+.container-fluid{
+    position: absolute;
+    align-self: center;
+}
+
+.writing{
+    
+    vertical-align: middle;
+    width: 60%;
+    margin: 0 auto;
+
+}

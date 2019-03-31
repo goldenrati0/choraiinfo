@@ -1,0 +1,141 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> চুরি যাওয়া সকল জিনিষের সন্ধানে </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> চুরি যাওয়া সকল জিনিষের সন্ধানে </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS and FONT script -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/main2.css') }}">
+
+</head>
+
+<body>
+
+
+<div class="container-fluid">
+    <nav class="navbar sticky-top navbar-toggleable-md navbar-dark bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{{ url_for('home') }}">Chorai Info</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Made By:
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="https://github.com/tahmid-choyon">Md. Tahmid Hossain
+                            (14101148)</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Proudly Bangladeshi ♥
+                        <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item nav-right navbar-right">
+                    <a class="nav-link" href="{{ url_for("userbp.user_logout") }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="upper text-center">
+    <h2>What do you want to check?</h2>
+    <p></p>
+</div>
+
+
+<div class="container-fluid text-center">
+    <div class="icons">
+        <div class="row">
+            <div class="col-xs-6 col-centered">
+                <div class="icon">
+                    <a href="{{ url_for('search_vehicle') }}"><img class="img-responsive"
+                                                                   src="{{ url_for('static',filename='images/car.png') }}"
+                                                                   alt="Car"></a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-centered">
+                <div class="icon">
+                    <a href="{{ url_for('search_mobile') }}"><img class="img-responsive"
+                                                                  src="{{ url_for('static',filename='images/mobile.png') }}"
+                                                                  alt="Mobile"></a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-centered">
+                <div class="icon">
+                    <a href="{{ url_for('search_laptop') }}"><img class="img-responsive"
+                                                                  src="{{ url_for('static',filename='images/lap.png') }}"
+                                                                  alt="Laptop"></a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-centered">
+                <div class="icon">
+                    <a href="{{ url_for('search_vehicle') }}"><img class="img-responsive"
+                                                                   src="{{ url_for('static',filename='images/bike.png') }}"
+                                                                   alt="Motorcycle"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+
+
+<script src="{{ url_for('static',filename='js/main.js') }}"></script>
+
+<script>
+    window.jQuery || document.write('<script src="js/vendor/jquery-1.12.4.min.js"><\/script>')
+
+</script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga = function () {
+        ga.q.push(arguments)
+    };
+    ga.q = [];
+    ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto');
+    ga('send', 'pageview')
+</script>
+
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+</body>
+
+</html>

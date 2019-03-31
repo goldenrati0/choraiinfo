@@ -1,0 +1,100 @@
+.upper h2 {
+    font-size: 24px;
+    color: black;
+    line-height: 35px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 0px;
+}
+
+.upper p {
+    font-size: 13px;
+    color: black;
+    line-height: 22px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    font-family: 'Lato', sans-serif;
+    margin-top: 0px;
+}
+
+.lower {
+    margin-top: 20px;
+    width: 70%;
+    float: right;
+}
+
+.lower p {
+    font-size: 13px;
+    color: black;
+    line-height: 18px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-family: 'Lato', sans-serif;
+}
+
+.lower em {
+    font-size: 13px;
+    color: red;
+    line-height: 18px;
+    font-weight: 400i;
+    letter-spacing: 1px;
+    font-family: 'Lato', sans-serif;
+}
+
+.right h2 {
+    font-size: 24px;
+    color: black;
+    line-height: 35px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 0px;
+    padding-left: 15px;
+}
+
+.info {
+    margin: 15px;
+}
+
+.info a {
+    border: 2px solid black;
+    border-radius: 35px;
+    text-decoration: none;
+    font-size: 14px;
+    color: black;
+    line-height: 22px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    padding: 5px;
+    padding-left: 15px;
+    font-family: 'Lato', sans-serif;
+    display: block;
+    width: 65%;
+}
+
+#l {
+    float: left;
+}
+
+#r {
+    float: right;
+    padding-right: 10px;
+}
+
+.content {
+    margin-top: 100px;
+}
+
+.left {
+    margin-top: 225px;
+}
+
+.verticalLine {
+    border-right: 0.8px solid #d6d9da;
+    height: 500px;
+}
+
+.right {
+    margin-top: 225px;
+}

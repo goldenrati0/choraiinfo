@@ -1,0 +1,326 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> চুরি যাওয়া সকল জিনিষের সন্ধানে </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/admindash.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/media.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" defer></script>
+    <script src="dist/js/bootstrap-checkbox.min.js" defer></script>
+
+</head>
+
+<body>
+<div class="container-fluid">
+
+    <nav class="navbar sticky-top navbar-toggleable-md navbar-dark bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{{url_for('home')}}">Chorai Info</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Made By:
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="https://github.com/tahmid-choyon">Md. Tahmid Hossain (14101148)</a>
+                </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Proudly Bangladeshi ♥
+                        <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item nav-right navbar-right">
+                    <a class="nav-link" href="{{ url_for("userbp.user_logout") }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="upper text-center">
+            <h2>Add Users</h2>
+            <p>Add Police/Admins and General Users from here!</p>
+        </div>
+
+        <!-- ADD USER DATA -->
+
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add User</button>
+
+        <!--Data of Device 1 Here inside the Modal Box-->
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add User</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="lower text-right">
+                            <form action="/register" method="post">
+                                <div class="form-group">
+                                    <input type="text" name="name" placeholder="Username" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="Password" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="phone" placeholder="Phone" required>
+                                </div>
+                                <button type='submit' value="submit" class="submitButton">Submit</button>
+
+                            </form>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="upper text-center">
+                <h2>List of All Users</h2>
+                <p>This is a list of All Users</p>
+            </div>
+
+            <!-- USER DATA -->
+
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">User ID:
+                14201001
+            </button>
+
+            <!--Data of Device 1 Here inside the Modal Box-->
+
+            <div class="modal fade" id="myModal2" role="dialog">
+                <div class="modal-dialog">
+{% for user in users %}
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Unique ID: 14201001</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <li class="list-group-item">Name: {{user.name}}</li>
+                            <li class="list-group-item">Unique ID: {{user.id}}</li>
+                            <li class="list-group-item">Contact Number: {{user.phone}}</li>
+                            <li class="list-group-item">Email ID: {{user.email}}</li>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+{% endfor %}
+            <div class="container">
+                <div class="upper text-center">
+                    <h2>Lost and Found</h2>
+                    <p>This is a list of all lost objects.</p>
+                </div>
+
+                <!-- Device 1 Listed Here Underneath -->
+
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal40">Device
+                    ID: 0115874 (Nokia C58)
+                </button>
+
+                <!--Data of Device 2 Here inside the Modal Box-->
+
+                <div class="modal fade" id="myModal40" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">ID: 0145845</h4>
+                            </div>
+                            <div class="modal-body">
+                                <li class="list-group-item">Object: Merida Cycle</li>
+                                <li class="list-group-item">Merida Chassis Number: 01548:15475:15486:058456</li>
+                                <li class="list-group-item">Owner Comments: Pherot dile onek taka dibo.</li>
+                                <li class="list-group-item">Owner Contact Number: 01548:15475:15486:058456</li>
+                                <li class="list-group-item">Device Lost On: 15.13.1258</li>
+                                <li class="list-group-item">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Delete Object
+                                    </button>
+                                </li>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- Device 2 Listed Here Underneath -->
+
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal4">Device ID:
+                    011584 (Merida Cycle)
+                </button>
+
+                <!--Data of Device 2 Here inside the Modal Box-->
+
+                <div class="modal fade" id="myModal4" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">ID: 0145845</h4>
+                            </div>
+                            <div class="modal-body">
+                                <li class="list-group-item">Object: Merida Cycle</li>
+                                <li class="list-group-item">Merida Chassis Number: 01548:15475:15486:058456</li>
+                                <li class="list-group-item">Owner Comments: Pherot dile onek taka dibo.</li>
+                                <li class="list-group-item">Owner Contact Number: 01548:15475:15486:058456</li>
+                                <li class="list-group-item">Device Lost On: 15.13.1258</li>
+                                <li class="list-group-item">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Delete Object
+                                    </button>
+                                </li>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- Device 3 Listed Here Underneath -->
+
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal5">Device ID:
+                    011584 (Dell Inspiron N78 Laptop)
+                </button>
+
+                <!--Data of Device 3 Here inside the Modal Box-->
+
+                <div class="modal fade" id="myModal5" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">ID: 0145845</h4>
+                            </div>
+                            <div class="modal-body">
+                                <li class="list-group-item">Object: Mobile Phone</li>
+                                <li class="list-group-item">Device IMEI: 01548:15475:15486:058456</li>
+                                <li class="list-group-item">Owner Contact Number: 01548:15475:15486:058456</li>
+                                <li class="list-group-item">Added On: 15.13.1258</li>
+                                <li class="list-group-item"><p>Device Status : </p>
+                                <li class="list-group-item">Device Lost On: 15.13.1258</li>
+                                <li class="list-group-item">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Delete Object
+                                    </button>
+                                </li>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <span style="display:block; height: 200px;"></span>
+
+
+            </div>
+
+        </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+        <!-- jQuery first, then Tether, then Bootstrap JS. -->
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+                integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+                integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+                integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+                crossorigin="anonymous"></script>
+
+
+        <script src="js/main.js"></script>
+
+        <script>
+            window.jQuery || document.write('<script src="js/vendor/jquery-1.12.4.min.js"><\/script>')
+
+
+        </script>
+
+        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+        <script>
+            window.ga = function () {
+                ga.q.push(arguments)
+            };
+            ga.q = [];
+            ga.l = +new Date;
+            ga('create', 'UA-XXXXX-Y', 'auto');
+            ga('send', 'pageview')
+
+
+        </script>
+
+        <script>
+        </script>
+        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+</body>
+
+</html>

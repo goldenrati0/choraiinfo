@@ -1,0 +1,292 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title> চুরি যাওয়া সকল জিনিষের সন্ধানে </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/userdash.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/media.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" defer></script>
+    <script src="dist/js/bootstrap-checkbox.min.js" defer></script>
+
+</head>
+
+<body>
+<div class="container-fluid">
+
+    <nav class="navbar sticky-top navbar-toggleable-md navbar-dark bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{{ url_for('home') }}">Chorai Info</a>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Made By:
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="https://github.com/tahmid-choyon">Md. Tahmid Hossain
+                            (14101148)</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Proudly Bangladeshi ♥
+                        <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item nav-right navbar-right">
+                    <a class="nav-link" href="{{ url_for("userbp.user_logout") }}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="upper text-center">
+            <h2>Things You Own</h2>
+            <p>Objects that you own are here, even if they are not lost yet.</p>
+        </div>
+        {% for m in mobiles %}
+            <!-- Device 1 Listed Here Underneath -->
+
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#m{{ m.lost_item_id }}">
+                Mobile
+                ID: {{ m.lost_item_id }} {{ m.extra_details }}
+            </button>
+
+            <!--Data of Device 1 Here inside the Modal Box-->
+
+            <div class="modal fade" id="m{{ m.lost_item_id }}" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">ID: {{ m.lost_item_id }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <li class="list-group-item">Object: Mobile Phone</li>
+                            <li class="list-group-item">Model: {{ m.extra_details }}</li>
+                            <li class="list-group-item">Device IMEI 1: {{ m.imei_1 }}</li>
+                            <li class="list-group-item">Device IMEI 2: {{ m.imei_2 }}</li>
+                            <li class="list-group-item">Owner: {{ m.owner.name }}</li>
+                            <li class="list-group-item">Owner Contact Number: {{ m.owner.phone }}</li>
+                            <li class="list-group-item">Added On: {{ m.regtime }}</li>
+                            <li class="list-group-item"><p>Device Status : {% if m.stolen == 1 %} Stolen {% else %} Not
+                                Stolen {% endif %}</p>
+
+
+                            </li>
+                            <li class="list-group-item">GD Number: {{ m.gd_copy_number }}</li>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+        {% for l in laptops %}
+            <!-- Device 1 Listed Here Underneath -->
+
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#l{{ l.lost_item_id }}">
+                Laptop
+                ID: {{ l.lost_item_id }} {{ l.extra_details }}
+            </button>
+
+            <!--Data of Device 1 Here inside the Modal Box-->
+
+            <div class="modal fade" id="l{{ l.lost_item_id }}" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">ID: {{ l.lost_item_id }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <li class="list-group-item">Object: Laptop</li>
+                            <li class="list-group-item">Model: {{ l.extra_details }}</li>
+                            <li class="list-group-item">Serial Number: {{ l.serial_number }}</li>
+                            <li class="list-group-item">MacID: {{ l.macID }}</li>
+                            <li class="list-group-item">Owner: {{ l.owner.name }}</li>
+                            <li class="list-group-item">Owner Contact Number: {{ l.owner.phone }}</li>
+                            <li class="list-group-item">Added On: {{ l.regtime }}</li>
+                            <li class="list-group-item"><p>Device Status : {% if l.stolen == 1 %} Stolen {% else %} Not
+                                Stolen {% endif %}</p>
+
+
+                            </li>
+                            <li class="list-group-item">GD Number: {{ l.gd_copy_number }}</li>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+        {% for v in vehicles %}
+            <!-- Device 1 Listed Here Underneath -->
+
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#v{{ v.lost_item_id }}">
+                Vehicle
+                ID: {{ v.lost_item_id }} {{ v.extra_details }}
+            </button>
+
+            <!--Data of Device 1 Here inside the Modal Box-->
+
+            <div class="modal fade" id="v{{ v.lost_item_id }}" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">ID: {{ v.lost_item_id }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <li class="list-group-item">Object: Vehicle</li>
+                            <li class="list-group-item">Model: {{ v.extra_details }}</li>
+                            <li class="list-group-item">Serial Number: {{ v.serial_number }}</li>
+                            <li class="list-group-item">Engine Number: {{ v.engine_number }}</li>
+                            <li class="list-group-item">License Number: {{ v.license_number }}</li>
+                            <li class="list-group-item">Owner: {{ v.owner.name }}</li>
+                            <li class="list-group-item">Owner Contact Number: {{ v.owner.phone }}</li>
+                            <li class="list-group-item">Added On: {{ v.regtime }}</li>
+                            <li class="list-group-item"><p>Device Status : {% if v.stolen == 1 %} Stolen {% else %} Not
+                                Stolen {% endif %}</p>
+                            </li>
+                            <li class="list-group-item">GD Number: {{ v.gd_copy_number }}</li>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    </div>
+    <div class="container">
+        <div class="upper text-center">
+            <h2>Add Your Personal Devices</h2>
+            <p>Add the Objects that you own here - you can change their status if you lose them later</p>
+        </div>
+
+        <div class="icons">
+            <div class="row">
+                <div class="col-sm-7 col-md-7 col-lg-7"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-1 col-sm-1 col-md-3 col-lg-3"></div>
+                <div class="col-xs-1 col-sm-4 col-md-1 col-lg-1 ">
+                    <div class="icon">
+                        <a href="#"><img class="img-responsive"
+                                         src="{{ url_for('static', filename='images/bicycle.png') }}" alt="Bicycle"></a>
+                    </div>
+                </div>
+                <div class="col-xs-1 col-sm-4 col-md-1 col-lg-1 ">
+                    <div class="icon">
+                        <a href="{{ url_for('add_vehicle') }}"><img class="img-responsive"
+                                                                    src="{{ url_for('static', filename='images/car.png') }}"
+                                                                    alt="Car"></a>
+                    </div>
+                </div>
+                <div class="col-xs-1 col-sm-4 col-md-1 col-lg-1 ">
+                    <div class="icon">
+                        <a href="{{ url_for('add_mobile') }}"><img class="img-responsive"
+                                                                   src="{{ url_for('static', filename='images/LAPV2.png') }}"
+                                                                   alt="Mobile"></a>
+                    </div>
+                </div>
+                <div class="col-xs-1 col-sm-4 col-md-1 col-lg-1 ">
+                    <div class="icon">
+                        <a href="{{ url_for('add_laptop') }}"><img class="img-responsive"
+                                                                   src="{{ url_for('static', filename='images/lap.png') }}"
+                                                                   alt="Laptop"></a>
+                    </div>
+                </div>
+                <div class="col-xs-1 col-sm-4 col-md-1 col-lg-1">
+                    <div class="icon">
+                        <a href="{{ url_for('add_vehicle') }}"><img
+                                src="{{ url_for('static', filename='images/bike.png') }}" alt="Motorcycle"></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<script>
+    window.jQuery || document.write('<script src="js/vendor/jquery-1.12.4.min.js"><\/script>')
+
+</script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga = function () {
+        ga.q.push(arguments)
+    };
+    ga.q = [];
+    ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto');
+    ga('send', 'pageview')
+
+</script>
+
+<script>
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+</body>
+
+</html>
