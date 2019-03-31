@@ -3,9 +3,11 @@ from datetime import datetime
 from typing import List, Dict, Any
 
 import bcrypt
+from flask_login import UserMixin
 from sqlalchemy import Enum
 from sqlalchemy.dialects.postgresql import UUID, JSON
 
+from src.setup import login_manager
 from src.utilities import Generator
 from .base import db, BaseModel
 
@@ -17,7 +19,7 @@ class UserLevelEnum(enum.Enum):
     SUPER_ADMIN = "super-admin"
 
 
-class User(BaseModel, db.Model):
+class User(BaseModel, db.Model, UserMixin):
     """
         CREATE TABLE "user" (
             uid UUID NOT NULL,
@@ -59,6 +61,9 @@ class User(BaseModel, db.Model):
     def __str__(self):
         return self.__repr__()
 
+    def get_id(self):
+        return self.uid
+
     def check_password(self, password: str) -> bool:
         return password is not None \
                and password != "" \
@@ -81,3 +86,8 @@ class User(BaseModel, db.Model):
     @property
     def address(self) -> Dict[str, Any]:
         return self._address
+
+
+@login_manager.user_loader
+def load_user(user_id: str):
+    return User.query.get(user_id)
