@@ -74,10 +74,10 @@
                     <h2>
                         This laptop originally belongs to:
                     </h2>
-                    <div class="info text-left"><a>{{ laptop.owner.name }}</a></div>
-                    <div class="info text-left"><a>{{ laptop.owner.phone }}</a></div>
+                    <div class="info text-left"><a>{{ laptop.owner.username }}</a></div>
+                    <div class="info text-left"><a>{{ laptop.owner._phones }}</a></div>
                     <div class="info text-left"><a>GD NO - {{ laptop.gd_copy_number }}</a></div>
-                    <div class="info text-left"><a>MODEL - {{ laptop.extra_details }}</a></div>
+                    <div class="info text-left"><a>MODEL - {{ laptop.remarks }}</a></div>
                 </div>
             </div>
         </div>

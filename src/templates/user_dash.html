@@ -71,7 +71,7 @@
 
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#m{{ m.lost_item_id }}">
                 Mobile
-                ID: {{ m.lost_item_id }} {{ m.extra_details }}
+                ID: {{ m.lost_item_id }} {{ m.remarks }}
             </button>
 
             <!--Data of Device 1 Here inside the Modal Box-->
@@ -87,11 +87,11 @@
                         </div>
                         <div class="modal-body">
                             <li class="list-group-item">Object: Mobile Phone</li>
-                            <li class="list-group-item">Model: {{ m.extra_details }}</li>
+                            <li class="list-group-item">Model: {{ m.remarks }}</li>
                             <li class="list-group-item">Device IMEI 1: {{ m.imei_1 }}</li>
                             <li class="list-group-item">Device IMEI 2: {{ m.imei_2 }}</li>
-                            <li class="list-group-item">Owner: {{ m.owner.name }}</li>
-                            <li class="list-group-item">Owner Contact Number: {{ m.owner.phone }}</li>
+                            <li class="list-group-item">Owner: {{ m.owner.username }}</li>
+                            <li class="list-group-item">Owner Contact Number: {{ m.owner._phones }}</li>
                             <li class="list-group-item">Added On: {{ m.regtime }}</li>
                             <li class="list-group-item"><p>Device Status : {% if m.stolen == 1 %} Stolen {% else %} Not
                                 Stolen {% endif %}</p>
@@ -114,7 +114,7 @@
 
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#l{{ l.lost_item_id }}">
                 Laptop
-                ID: {{ l.lost_item_id }} {{ l.extra_details }}
+                ID: {{ l.lost_item_id }} {{ l.remarks }}
             </button>
 
             <!--Data of Device 1 Here inside the Modal Box-->
@@ -130,11 +130,11 @@
                         </div>
                         <div class="modal-body">
                             <li class="list-group-item">Object: Laptop</li>
-                            <li class="list-group-item">Model: {{ l.extra_details }}</li>
+                            <li class="list-group-item">Model: {{ l.remarks }}</li>
                             <li class="list-group-item">Serial Number: {{ l.serial_number }}</li>
                             <li class="list-group-item">MacID: {{ l.macID }}</li>
-                            <li class="list-group-item">Owner: {{ l.owner.name }}</li>
-                            <li class="list-group-item">Owner Contact Number: {{ l.owner.phone }}</li>
+                            <li class="list-group-item">Owner: {{ l.owner.username }}</li>
+                            <li class="list-group-item">Owner Contact Number: {{ l.owner._phones }}</li>
                             <li class="list-group-item">Added On: {{ l.regtime }}</li>
                             <li class="list-group-item"><p>Device Status : {% if l.stolen == 1 %} Stolen {% else %} Not
                                 Stolen {% endif %}</p>
@@ -157,7 +157,7 @@
 
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#v{{ v.lost_item_id }}">
                 Vehicle
-                ID: {{ v.lost_item_id }} {{ v.extra_details }}
+                ID: {{ v.lost_item_id }} {{ v.remarks }}
             </button>
 
             <!--Data of Device 1 Here inside the Modal Box-->
@@ -173,12 +173,12 @@
                         </div>
                         <div class="modal-body">
                             <li class="list-group-item">Object: Vehicle</li>
-                            <li class="list-group-item">Model: {{ v.extra_details }}</li>
+                            <li class="list-group-item">Model: {{ v.remarks }}</li>
                             <li class="list-group-item">Serial Number: {{ v.serial_number }}</li>
                             <li class="list-group-item">Engine Number: {{ v.engine_number }}</li>
                             <li class="list-group-item">License Number: {{ v.license_number }}</li>
-                            <li class="list-group-item">Owner: {{ v.owner.name }}</li>
-                            <li class="list-group-item">Owner Contact Number: {{ v.owner.phone }}</li>
+                            <li class="list-group-item">Owner: {{ v.owner.username }}</li>
+                            <li class="list-group-item">Owner Contact Number: {{ v.owner._phones }}</li>
                             <li class="list-group-item">Added On: {{ v.regtime }}</li>
                             <li class="list-group-item"><p>Device Status : {% if v.stolen == 1 %} Stolen {% else %} Not
                                 Stolen {% endif %}</p>

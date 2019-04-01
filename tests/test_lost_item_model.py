@@ -27,7 +27,7 @@ class TestLostItem(TestCase):
 
     def tearDown(self):
         self.db.session.remove()
-        self.db.drop_all()
+        # self.db.drop_all()
 
     def test_lost_item_parent_class(self):
         user = get_new_user()

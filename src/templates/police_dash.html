@@ -69,7 +69,7 @@
 {% for stolen in datas %}
         <!-- Device 1 Listed Here Underneath -->
 
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{stolen[0]}}">{{stolen[0]}} {{stolen[3].extra_details}}
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal{{stolen[0]}}">{{stolen[0]}} {{stolen[3].remarks}}
         </button>
 
         <!--Data of Device 1 Here inside the Modal Box-->
@@ -88,7 +88,7 @@
                         <li class="list-group-item">Contact: {{stolen[1].phone}}</li>
                         <li class="list-group-item">Owner: {{stolen[2].name}}</li>
                         <li class="list-group-item">Contact: {{stolen[2].phone}}</li>
-                        <li class="list-group-item">Info: {{stolen[3].extra_details}}</li>
+                        <li class="list-group-item">Info: {{stolen[3].remarks}}</li>
                         <li class="list-group-item">Registered on: {{stolen[3].regtime}}</li>
                     </div>
                     <div class="modal-footer">
