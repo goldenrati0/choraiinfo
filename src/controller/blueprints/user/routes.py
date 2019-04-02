@@ -42,13 +42,11 @@ def user_login():
         user = get_user_from_email(email)
         login_user(user)
         print(user.json)
-        return make_response(jsonify(
-            user.json
-        ), 200)
+        return redirect(url_for("home"))
 
 
 @user_blueprint.route("/logout")
 def user_logout():
     if current_user.is_authenticated:
         logout_user()
-    return redirect(url_for("userbp.user_login"))
+    return redirect(url_for("home"))

@@ -48,12 +48,18 @@
                 <a class="nav-link" href="">Proudly Bangladeshi ♥
                     <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item nav-right navbar-right">
-                <a class="nav-link" href="{{ url_for("userbp.user_login") }}">Login</a>
-            </li>
-            <li class="nav-item nav-right navbar-right">
-                <a class="nav-link" href="{{ url_for("userbp.user_register") }}">Register</a>
-            </li>
+            {% if current_user.is_authenticated %}
+                <li class="nav-item nav-right navbar-right">
+                    <a class="nav-link" href="{{ url_for("userbp.user_logout") }}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item nav-right navbar-right">
+                    <a class="nav-link" href="{{ url_for("userbp.user_login") }}">Login</a>
+                </li>
+                <li class="nav-item nav-right navbar-right">
+                    <a class="nav-link" href="{{ url_for("userbp.user_register") }}">Register</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

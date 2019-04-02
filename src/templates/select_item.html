@@ -55,9 +55,18 @@
                     <a class="nav-link" href="">Proudly Bangladeshi ♥
                         <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item nav-right navbar-right">
-                    <a class="nav-link" href="{{ url_for("userbp.user_logout") }}">Logout</a>
-                </li>
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item nav-right navbar-right">
+                        <a class="nav-link" href="{{ url_for("userbp.user_logout") }}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item nav-right navbar-right">
+                        <a class="nav-link" href="{{ url_for("userbp.user_login") }}">Login</a>
+                    </li>
+                    <li class="nav-item nav-right navbar-right">
+                        <a class="nav-link" href="{{ url_for("userbp.user_register") }}">Register</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -88,16 +97,16 @@
             </div>
             <div class="col-xs-6 col-centered">
                 <div class="icon">
-                    <a href="{{ url_for('lostitembp.select_item') }}"><img class="img-responsive"
-                                                                           src="{{ url_for('static',filename='images/LAPV2.png') }}"
-                                                                           alt="Mobile"></a>
+                    <a href="{{ url_for('lostitembp.search_phone') }}"><img class="img-responsive"
+                                                                            src="{{ url_for('static',filename='images/LAPV2.png') }}"
+                                                                            alt="Mobile"></a>
                 </div>
             </div>
             <div class="col-xs-6 col-centered">
                 <div class="icon">
-                    <a href="{{ url_for('lostitembp.select_item') }}"><img class="img-responsive"
-                                                                           src="{{ url_for('static',filename='images/lap.png') }}"
-                                                                           alt="Laptop"></a>
+                    <a href="{{ url_for('lostitembp.search_laptop') }}"><img class="img-responsive"
+                                                                             src="{{ url_for('static',filename='images/lap.png') }}"
+                                                                             alt="Laptop"></a>
                 </div>
             </div>
         </div>
