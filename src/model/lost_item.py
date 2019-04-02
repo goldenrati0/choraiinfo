@@ -26,6 +26,7 @@ class LostItem(BaseModel):
     def __init__(self, item_type, **kwargs):
         super(LostItem, self).__init__(**kwargs)
         self.item_type = item_type
+        self.is_stolen = kwargs.get("is_stolen") if "is_stolen" in kwargs else False
         if kwargs.get("is_stolen") is True:
             self.last_update = datetime.now()
 

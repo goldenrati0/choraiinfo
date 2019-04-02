@@ -66,12 +66,12 @@
             <h2>Things You Own</h2>
             <p>Objects that you own are here, even if they are not lost yet.</p>
         </div>
-        {% for m in mobiles %}
+        {% for m in user.cell_phones %}
             <!-- Device 1 Listed Here Underneath -->
 
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#m{{ m.lost_item_id }}">
                 Mobile
-                ID: {{ m.lost_item_id }} {{ m.remarks }}
+                ID: {{ m.id }} {{ m.remarks }}
             </button>
 
             <!--Data of Device 1 Here inside the Modal Box-->
@@ -83,17 +83,15 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">ID: {{ m.lost_item_id }}</h4>
+                            <h4 class="modal-title">ID: {{ m.id }}</h4>
                         </div>
                         <div class="modal-body">
                             <li class="list-group-item">Object: Mobile Phone</li>
                             <li class="list-group-item">Model: {{ m.remarks }}</li>
                             <li class="list-group-item">Device IMEI 1: {{ m.imei_1 }}</li>
                             <li class="list-group-item">Device IMEI 2: {{ m.imei_2 }}</li>
-                            <li class="list-group-item">Owner: {{ m.owner.username }}</li>
-                            <li class="list-group-item">Owner Contact Number: {{ m.owner._phones }}</li>
-                            <li class="list-group-item">Added On: {{ m.regtime }}</li>
-                            <li class="list-group-item"><p>Device Status : {% if m.stolen == 1 %} Stolen {% else %} Not
+                            <li class="list-group-item"><p>Device Status : {% if m.is_stolen == 1 %} Stolen {% else %}
+                                Not
                                 Stolen {% endif %}</p>
 
 
@@ -109,34 +107,32 @@
                 </div>
             </div>
         {% endfor %}
-        {% for l in laptops %}
+        {% for l in user.laptops %}
             <!-- Device 1 Listed Here Underneath -->
 
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#l{{ l.lost_item_id }}">
                 Laptop
-                ID: {{ l.lost_item_id }} {{ l.remarks }}
+                ID: {{ l.id }} {{ l.remarks }}
             </button>
 
             <!--Data of Device 1 Here inside the Modal Box-->
 
-            <div class="modal fade" id="l{{ l.lost_item_id }}" role="dialog">
+            <div class="modal fade" id="l{{ l.id }}" role="dialog">
                 <div class="modal-dialog">
 
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">ID: {{ l.lost_item_id }}</h4>
+                            <h4 class="modal-title">ID: {{ l.id }}</h4>
                         </div>
                         <div class="modal-body">
                             <li class="list-group-item">Object: Laptop</li>
                             <li class="list-group-item">Model: {{ l.remarks }}</li>
                             <li class="list-group-item">Serial Number: {{ l.serial_number }}</li>
-                            <li class="list-group-item">MacID: {{ l.macID }}</li>
-                            <li class="list-group-item">Owner: {{ l.owner.username }}</li>
-                            <li class="list-group-item">Owner Contact Number: {{ l.owner._phones }}</li>
-                            <li class="list-group-item">Added On: {{ l.regtime }}</li>
-                            <li class="list-group-item"><p>Device Status : {% if l.stolen == 1 %} Stolen {% else %} Not
+                            <li class="list-group-item">MacID: {{ l.mac_address }}</li>
+                            <li class="list-group-item"><p>Device Status : {% if l.is_stolen == 1 %} Stolen {% else %}
+                                Not
                                 Stolen {% endif %}</p>
 
 
@@ -152,24 +148,24 @@
                 </div>
             </div>
         {% endfor %}
-        {% for v in vehicles %}
+        {% for v in user.vehicles %}
             <!-- Device 1 Listed Here Underneath -->
 
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#v{{ v.lost_item_id }}">
                 Vehicle
-                ID: {{ v.lost_item_id }} {{ v.remarks }}
+                ID: {{ v.id }} {{ v.remarks }}
             </button>
 
             <!--Data of Device 1 Here inside the Modal Box-->
 
-            <div class="modal fade" id="v{{ v.lost_item_id }}" role="dialog">
+            <div class="modal fade" id="v{{ v.id }}" role="dialog">
                 <div class="modal-dialog">
 
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">ID: {{ v.lost_item_id }}</h4>
+                            <h4 class="modal-title">ID: {{ v.id }}</h4>
                         </div>
                         <div class="modal-body">
                             <li class="list-group-item">Object: Vehicle</li>
@@ -177,9 +173,6 @@
                             <li class="list-group-item">Serial Number: {{ v.serial_number }}</li>
                             <li class="list-group-item">Engine Number: {{ v.engine_number }}</li>
                             <li class="list-group-item">License Number: {{ v.license_number }}</li>
-                            <li class="list-group-item">Owner: {{ v.owner.username }}</li>
-                            <li class="list-group-item">Owner Contact Number: {{ v.owner._phones }}</li>
-                            <li class="list-group-item">Added On: {{ v.regtime }}</li>
                             <li class="list-group-item"><p>Device Status : {% if v.stolen == 1 %} Stolen {% else %} Not
                                 Stolen {% endif %}</p>
                             </li>
@@ -207,36 +200,36 @@
             </div>
             <div class="row">
                 <div class="col-xs-1 col-sm-1 col-md-3 col-lg-3"></div>
-                <div class="col-xs-1 col-sm-4 col-md-1 col-lg-1 ">
+                {#<div class="col-xs-1 col-sm-4 col-md-1 col-lg-1 ">
                     <div class="icon">
                         <a href="#"><img class="img-responsive"
                                          src="{{ url_for('static', filename='images/bicycle.png') }}" alt="Bicycle"></a>
                     </div>
-                </div>
+                </div>#}
                 <div class="col-xs-1 col-sm-4 col-md-1 col-lg-1 ">
                     <div class="icon">
-                        <a href="{{ url_for('add_vehicle') }}"><img class="img-responsive"
-                                                                    src="{{ url_for('static', filename='images/car.png') }}"
-                                                                    alt="Car"></a>
+                        <a href="{{ url_for('lostitembp.report_vehicle') }}"><img class="img-responsive"
+                                                                                  src="{{ url_for('static', filename='images/car.png') }}"
+                                                                                  alt="Car"></a>
                     </div>
                 </div>
                 <div class="col-xs-1 col-sm-4 col-md-1 col-lg-1 ">
                     <div class="icon">
-                        <a href="{{ url_for('add_mobile') }}"><img class="img-responsive"
-                                                                   src="{{ url_for('static', filename='images/LAPV2.png') }}"
-                                                                   alt="Mobile"></a>
+                        <a href="{{ url_for('lostitembp.report_mobile') }}"><img class="img-responsive"
+                                                                                 src="{{ url_for('static', filename='images/LAPV2.png') }}"
+                                                                                 alt="Mobile"></a>
                     </div>
                 </div>
                 <div class="col-xs-1 col-sm-4 col-md-1 col-lg-1 ">
                     <div class="icon">
-                        <a href="{{ url_for('add_laptop') }}"><img class="img-responsive"
-                                                                   src="{{ url_for('static', filename='images/lap.png') }}"
-                                                                   alt="Laptop"></a>
+                        <a href="{{ url_for('lostitembp.report_laptop') }}"><img class="img-responsive"
+                                                                                 src="{{ url_for('static', filename='images/lap.png') }}"
+                                                                                 alt="Laptop"></a>
                     </div>
                 </div>
                 <div class="col-xs-1 col-sm-4 col-md-1 col-lg-1">
                     <div class="icon">
-                        <a href="{{ url_for('add_vehicle') }}"><img
+                        <a href="{{ url_for('lostitembp.report_vehicle') }}"><img
                                 src="{{ url_for('static', filename='images/bike.png') }}" alt="Motorcycle"></a>
                     </div>
                 </div>

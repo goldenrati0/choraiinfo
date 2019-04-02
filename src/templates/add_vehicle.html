@@ -19,9 +19,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{url_for('static', filename='css/main4.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main4.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/media.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/media.css') }}">
 
 
 </head>
@@ -34,7 +34,7 @@
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="{{url_for('home')}}">Chorai Info</a>
+    <a class="navbar-brand" href="{{ url_for('home') }}">Chorai Info</a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
 
@@ -52,8 +52,8 @@
                     <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item nav-right navbar-right">
-                    <a class="nav-link" href="{{ url_for("userbp.user_logout") }}">Logout</a>
-                </li>
+                <a class="nav-link" href="{{ url_for("userbp.user_logout") }}">Logout</a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -66,27 +66,27 @@
             <h3>Hey {{ user }}</h3>
             </br>
             <h2>Register your stolen vehicle</h2>
-            <p>all fields are not mandatory</p>
+            <p>All fields are not mandatory</p>
         </div>
         <div class="lower text-right">
-            <form action="/add_vehicle" method="POST">
+            <form action="{{ url_for("lostitembp.report_vehicle") }}" method="post">
                 <div class="form-group">
 
                     <input type="text" class="form-control" name="license" placeholder="License No" required>
                 </div>
                 <div class="form-group">
 
-                    <input type="text" class="form-control" name="serialNo" placeholder="Chassis No">
+                    <input type="text" class="form-control" name="serial" placeholder="Serial No">
                 </div>
                 <div class="form-group">
 
-                    <input type="text" class="form-control" name="engineNo" placeholder="Engine No">
+                    <input type="text" class="form-control" name="engine" placeholder="Engine No">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="gdno" placeholder="GD Copy No">
+                    <input type="text" class="form-control" name="gd" placeholder="GD Copy No">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="model" placeholder="Model No">
+                    <input type="text" class="form-control" name="remarks" placeholder="Remarks">
                 </div>
                 <div class="form-group">
                     <select name="stolen">
@@ -96,7 +96,7 @@
                 </div>
 
                 <button type="submit" value="submit" class="button "><img
-                        src="{{url_for('static', filename='images/cursor.png')}}">
+                        src="{{ url_for('static', filename='images/cursor.png') }}">
                 </button>
             </form>
         </div>
@@ -118,23 +118,23 @@
         crossorigin="anonymous"></script>
 
 
-<script src="{{url_for('static', filename='js/main.js')}}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 <script>
-        window.jQuery || document.write('<script src="js/vendor/jquery-1.12.4.min.js"><\/script>')
+    window.jQuery || document.write('<script src="js/vendor/jquery-1.12.4.min.js"><\/script>')
 
 
 </script>
 
 <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 <script>
-        window.ga = function () {
-            ga.q.push(arguments)
-        };
-        ga.q = [];
-        ga.l = +new Date;
-        ga('create', 'UA-XXXXX-Y', 'auto');
-        ga('send', 'pageview')
+    window.ga = function () {
+        ga.q.push(arguments)
+    };
+    ga.q = [];
+    ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto');
+    ga('send', 'pageview')
 
 
 </script>
