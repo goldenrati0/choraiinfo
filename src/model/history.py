@@ -28,14 +28,16 @@ class SearchHistory(BaseModel, db.Model):
             laptops = Laptop.query.filter(
                 (Laptop.mac_address.ilike(f"%{self.search_string}%")) |
                 (Laptop.serial_number.ilike(f"%{self.search_string}%")) |
-                (Laptop.gd_copy_number.ilike(f"%{self.search_string}%"))
+                (Laptop.gd_copy_number.ilike(f"%{self.search_string}%")) |
+                (Laptop.remarks.ilike(f"%{self.search_string}%"))
             ).all()
             items.extend(laptops)
         elif self.item_type == ItemTypeEnum.CELL_PHONE:
             phones = CellPhone.query.filter(
                 (CellPhone.gd_copy_number.ilike(f"%{self.search_string}%")) |
                 (CellPhone.imei_1.ilike(f"%{self.search_string}%")) |
-                (CellPhone.imei_2.ilike(f"%{self.search_string}%"))
+                (CellPhone.imei_2.ilike(f"%{self.search_string}%")) |
+                (CellPhone.remarks.ilike(f"%{self.search_string}%"))
             ).all()
             items.extend(phones)
         elif self.item_type == ItemTypeEnum.VEHICLE:
@@ -43,7 +45,8 @@ class SearchHistory(BaseModel, db.Model):
                 (Vehicle.gd_copy_number.ilike(f"%{self.search_string}%")) |
                 (Vehicle.serial_number.ilike(f"%{self.search_string}%")) |
                 (Vehicle.engine_number.ilike(f"%{self.search_string}%")) |
-                (Vehicle.license_number.ilike(f"%{self.search_string}%"))
+                (Vehicle.license_number.ilike(f"%{self.search_string}%")) |
+                (Vehicle.remarks.ilike(f"%{self.search_string}%"))
             ).all()
             items.extend(vehicles)
 

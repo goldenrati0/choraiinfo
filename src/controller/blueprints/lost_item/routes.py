@@ -26,8 +26,8 @@ def report_vehicle():
         stolen = request.form.get("stolen") == "1"
         print(stolen)
 
-        item = add_item(current_user.uid, ItemTypeEnum.VEHICLE, serial_number=serial, engine_number=engine,
-                        license_number=license, remarks=remarks, is_stolen=stolen)
+        add_item(current_user.uid, ItemTypeEnum.VEHICLE, serial_number=serial, engine_number=engine,
+                 license_number=license, remarks=remarks, is_stolen=stolen)
         return redirect(url_for("userbp.dashboard"))
 
 
@@ -37,13 +37,13 @@ def report_laptop():
     if request.method == "GET":
         return render_template("add_laptop.html")
     if request.method == "POST":
-        license = request.form.get("license")
         serial = request.form.get("serial")
-        engine = request.form.get("engine")
-        remarks = request.form.get("remarks")
+        macid = request.form.get("macid")
+        gdno = request.form.get("gdno")
+        stolen = request.form.get("stolen") == "1"
 
-        item = add_item(current_user.uid, ItemTypeEnum.VEHICLE, serial_number=serial, engine_number=engine,
-                        license_number=license)
+        add_item(current_user.uid, ItemTypeEnum.LAPTOP, serial_number=serial, mac_address=macid, gd_copy_number=gdno,
+                 is_stolen=stolen)
         return redirect(url_for("userbp.dashboard"))
 
 
@@ -53,13 +53,14 @@ def report_mobile():
     if request.method == "GET":
         return render_template("add_mobile.html")
     if request.method == "POST":
-        license = request.form.get("license")
-        serial = request.form.get("serial")
-        engine = request.form.get("engine")
-        remarks = request.form.get("remarks")
+        imei_1 = request.form.get("imei_1")
+        imei_2 = request.form.get("imei_2")
+        model = request.form.get("model")
+        gdno = request.form.get("gdno")
+        stolen = request.form.get("stolen") == "1"
 
-        item = add_item(current_user.uid, ItemTypeEnum.VEHICLE, serial_number=serial, engine_number=engine,
-                        license_number=license)
+        add_item(current_user.uid, ItemTypeEnum.CELL_PHONE, imei_1=imei_1, imei_2=imei_2, gd_copy_number=gdno,
+                 is_stolen=stolen)
         return redirect(url_for("userbp.dashboard"))
 
 

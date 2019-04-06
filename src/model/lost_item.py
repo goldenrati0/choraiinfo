@@ -24,9 +24,10 @@ class LostItem(BaseModel):
     last_update = db.Column(db.DateTime, nullable=True)
 
     def __init__(self, item_type, **kwargs):
+        print("LostItem kwargs", kwargs)
         super(LostItem, self).__init__(**kwargs)
         self.item_type = item_type
-        self.is_stolen = kwargs.get("is_stolen") if "is_stolen" in kwargs else False
+        self.is_stolen = kwargs.get("is_stolen")
         if kwargs.get("is_stolen") is True:
             self.last_update = datetime.now()
 
@@ -141,6 +142,7 @@ class Vehicle(LostItem, db.Model):
     owner = db.relationship("User", back_populates="vehicles", lazy="joined")
 
     def __init__(self, user_uid, **kwargs):
+        print("Vehicle kwargs", kwargs)
         super(Vehicle, self).__init__(ItemTypeEnum.VEHICLE, **kwargs)
         self.user_uid = user_uid
         self.serial_number = kwargs.get("serial_number")
