@@ -59,7 +59,8 @@ class User(BaseModel, db.Model, UserMixin):
         return self.uid == other.uid
 
     def __str__(self):
-        return self.__repr__()
+        return f"<User " \
+            f"{self.username} | {self.email} | {self.joined_at}>"
 
     def get_id(self):
         return self.uid
